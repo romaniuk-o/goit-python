@@ -1,8 +1,8 @@
 from pathlib import Path
 import shutil
 import sys
-import file_parser as parser
-from normalize import normalize
+import clean_folder.file_parser as parser
+from clean_folder.normalize import normalize
 
 
 def handle_media(filename: Path, target_folder: Path):
@@ -90,6 +90,13 @@ def main(folder: Path):
     # Выполняем реверс списка для того, чтобы все папки удалить.
     for folder in parser.FOLDERS[::-1]:
         handle_folder(folder)
+
+
+def start():
+    if sys.argv[1]:
+        folder_for_scan = Path(sys.argv[1])
+        print(f'Start in folder {folder_for_scan.resolve()}')
+        main(folder_for_scan.resolve())
 
 
 if __name__ == '__main__':
